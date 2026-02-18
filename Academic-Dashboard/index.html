@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div id="notification-banner" class="banner">
+         <span id="banner-text">Welcome to the Academic Dashboard!</span>
+        </div>
+
+        <form id="data-entry-form">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="regNo">Registration No:</label><br>
+            <input type="text" id="regNo" name="regNo"><br>
+
+            <label for="cat">CAT Marks(0-30):</label><br>
+            <input type="number" id="cat" name="cat"><br>
+
+            <label for="exam">Exam Marks(0-70):</label><br>
+            <input type="number" id="exam" name="exam"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+        
+        <div id="results-container"></div>
+
+        <script src="index.js"></script>
+    </body>
+</html>
