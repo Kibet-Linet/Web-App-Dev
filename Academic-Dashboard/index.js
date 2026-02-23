@@ -19,17 +19,17 @@ dataEntryForm.addEventListener('submit', function(event) {
     const exam = parseFloat(examInput.value);
     
     if (!name || !regNo || catInput.value === "" || examInput.value === "") {
-        alert("Empty field detected");
+        showNotification("Empty field detected");
         return;
     }//ensures there is no empty field
 
     if (cat < 0 || cat > 30) {
-        alert("CAT marks must be between 0 and 30");
+        showNotification("CAT marks must be between 0 and 30");
         return;
     }//validates mark ranges
 
     if (exam < 0 || exam > 70) {
-        alert("Exam marks must be between 0 and 70");
+        showNotification("Exam marks must be between 0 and 70");
         return;
     }//validates mark ranges
 
@@ -56,7 +56,7 @@ dataEntryForm.addEventListener('submit', function(event) {
     
     students.push(student);//adding object to array
     createTable();//calling the funstion 
-    alert("Student added successfully.");
+    showNotification("Student added successfully.");
     dataEntryForm.reset();//clears form input
 });
 
@@ -65,17 +65,20 @@ function createTable() {
 
     table = document.createElement('table');
 
-    if (students.length > 0) { //checks if there are students in the array
-        const totalSum = students.reduce((sum, student) => sum + student.total, 0); //calculates total marks of all students
-        const average = (totalSum / students.length).toFixed(2); //calculates average and formats to 2 decimal places
-        const topStudent = students.reduce((top, current) => current.total > top.total ? current : top); //finds the student with the highest total marks
+    if (students.length > 0) {
+        const totalSum = students.reduce((sum, student) => sum + student.total, 0);
+        const average = (totalSum / students.length).toFixed(2);
+        const topStudent = students.reduce((top, current) => current.total > top.total ? current : top);
 
-        const statsDiv = document.createElement("div");//creates a div to display average and top student
-        const averagePara = document.createElement("p");//craetion of p element to show class average
-        averagePara.textContent = "Class Average: " + average;
+        const statsDiv = document.createElement("div");
+        statsDiv.classList.add("stats"); // class name
+
+        const averagePara = document.createElement("p");
+        averagePara.innerHTML = "Class Average: <strong>" + average + "</strong>";
+
         const topPara = document.createElement("p");
-        topPara.textContent = "Top Student: " + topStudent.name + " (" + topStudent.regNo + ") - " + topStudent.total + " marks";
-        
+        topPara.innerHTML = "Top Student: <strong>" + topStudent.name + " (" + topStudent.regNo + ") - " + topStudent.total + " marks</strong>";
+
         statsDiv.appendChild(averagePara);
         statsDiv.appendChild(topPara);
         resultsContainer.appendChild(statsDiv);
@@ -110,6 +113,7 @@ function createTable() {
         deleteBtn.addEventListener("click", function() {
             students.splice(index, 1);
             createTable();
+            showNotification("Student deleted successfully.");
         });
         deleteBtn.classList.add("delete-btn");
         deleteCell.appendChild(deleteBtn);
@@ -140,3 +144,13 @@ function moveBanner() {
 
 setInterval(moveBanner, 10); // update every 10ms
 
+function showNotification(message, duration = 3000) {
+    const notification = document.getElementById("notification");
+    notification.textContent = message;
+    notification.classList.add("show");
+
+    // Hide after the duration
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, duration);
+}
