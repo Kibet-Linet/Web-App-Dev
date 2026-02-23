@@ -5,28 +5,40 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+        <!-- banner -->
         <div id="notification-banner" class="banner">
          <span id="banner-text">Welcome to the Academic Dashboard!</span>
         </div>
 
+        <!-- form creation -->
         <form id="data-entry-form">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
+            <div class="entry">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+    
+            <div class="entry">
+                <label for="regNo">Registration No:</label>
+                <input type="text" id="regNo" name="regNo">
+            </div>
 
-            <label for="regNo">Registration No:</label><br>
-            <input type="text" id="regNo" name="regNo"><br>
+            <div class="entry">
+                <label for="cat">CAT Marks (0-30):</label>
+                <input type="number" id="cat" name="cat">
+            </div>
 
-            <label for="cat">CAT Marks(0-30):</label><br>
-            <input type="number" id="cat" name="cat"><br>
-
-            <label for="exam">Exam Marks(0-70):</label><br>
-            <input type="number" id="exam" name="exam"><br>
-
-            <input type="submit" value="Submit">
+            <div class="entry">
+                <label for="exam">Exam Marks (0-70):</label>
+                <input type="number" id="exam" name="exam">
+            </div>
+    
+            <input type="submit" value="Submit" class="submit">
         </form>
         
+        <!-- results container -->
         <div id="results-container"></div>
-
+       
+        <!-- javascript connection -->
         <script src="index.js"></script>
     </body>
 </html>

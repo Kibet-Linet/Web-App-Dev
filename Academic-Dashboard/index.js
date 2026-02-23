@@ -1,4 +1,4 @@
-//getting elements y their ID's
+//getting elements and their ID's
 const dataEntryForm = document.getElementById('data-entry-form');
 const nameInput = document.getElementById('name');
 const regNoInput = document.getElementById('regNo');
@@ -41,7 +41,7 @@ dataEntryForm.addEventListener('submit', function(event) {
     else if (total >= 60) grade = "B";
     else if (total >= 50) grade = "C";
     else if (total >= 40) grade = "D";
-    else  if (total<0 && total<=39) grade = "Fail";
+    else  if (total>=0 && total<=39) grade = "Fail";
     else grade="Invalid Input";
 
     //student object
@@ -65,17 +65,17 @@ function createTable() {
 
     table = document.createElement('table');
 
-    if (students.length > 0) {
-        const totalSum = students.reduce((sum, student) => sum + student.total, 0);
-        const average = (totalSum / students.length).toFixed(2);
-        const topStudent = students.reduce((top, current) => current.total > top.total ? current : top);
+    if (students.length > 0) { //checks if there are students in the array
+        const totalSum = students.reduce((sum, student) => sum + student.total, 0); //calculates total marks of all students
+        const average = (totalSum / students.length).toFixed(2); //calculates average and formats to 2 decimal places
+        const topStudent = students.reduce((top, current) => current.total > top.total ? current : top); //finds the student with the highest total marks
 
-        const statsDiv = document.createElement("div");
-        const averagePara = document.createElement("p");
+        const statsDiv = document.createElement("div");//creates a div to display average and top student
+        const averagePara = document.createElement("p");//craetion of p element to show class average
         averagePara.textContent = "Class Average: " + average;
         const topPara = document.createElement("p");
         topPara.textContent = "Top Student: " + topStudent.name + " (" + topStudent.regNo + ") - " + topStudent.total + " marks";
-
+        
         statsDiv.appendChild(averagePara);
         statsDiv.appendChild(topPara);
         resultsContainer.appendChild(statsDiv);
@@ -111,6 +111,7 @@ function createTable() {
             students.splice(index, 1);
             createTable();
         });
+        deleteBtn.classList.add("delete-btn");
         deleteCell.appendChild(deleteBtn);
 
         row.appendChild(nameCell);
@@ -129,7 +130,7 @@ const banner = document.getElementById("banner-text");
 let position = window.innerWidth; // start from the right side
 
 function moveBanner() {
-    position--; 
+    position--; //decreases position by 1 pixel
     if (position < -banner.offsetWidth) {
         position = window.innerWidth; // reset to right
     }
